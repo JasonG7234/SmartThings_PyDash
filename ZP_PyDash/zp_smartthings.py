@@ -362,22 +362,22 @@ def printAllDevices(allDevices):
 
 	for device in allDevices:
 		deviceKeys = allDevices[device].keys()
-		print "Device Type: ", device
+		print("Device Type: " + device)
 		for k in deviceKeys:
 			if (device != "deviceType" and device != "weather" ):
-				print "\t", k, 
+				print("\t" + k) 
 				if device in devicesWithState:
-					print " - ", allDevices[device][k]['state'],
+					print(" - " + allDevices[device][k]['state'])
 				if device in devicesWithValue:
-					print " - ", allDevices[device][k]['value'],
+					print(" - ", allDevices[device][k]['value'])
 				if device in devicesWithEnergy:
-					print " - ", allDevices[device][k]['energy'],
+					print(" - ", allDevices[device][k]['energy'])
 				if device in devicesWithLevel:
-					print " - ", allDevices[device][k]['level'], 
+					print(" - ", allDevices[device][k]['level']) 
 				if device == "mode":
-					print  " - ", allDevices[device][k]['mode'],
-				print " - ", allDevices[device][k]['deviceType'],
-			print ""
+					print(" - ", allDevices[device][k]['mode'])
+				print(" - ", allDevices[device][k]['deviceType'])
+			print("")
 
 def rgbToHsl(hex_value):
 	r = int(hex_value[1:3],16)
@@ -409,4 +409,5 @@ def rgbToHsl(hex_value):
 	s = s * 100.0
 	l = l * 100.0
 	return {"hue":h, "sat":s, "level":l, "hex":hex_value}
+
 

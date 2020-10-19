@@ -32,14 +32,14 @@ def run(app, xyzzyP):
                 host='0.0.0.0'
                 )
     finally:
-        print "Disconnecting clients"
+        print("Disconnecting clients")
         xyzzy.stopped = True
 
-        print "Stopping %d timers" % len(samplers)
+        print("Stopping " + str(len(samplers)) + " timers")
         for (i, sampler) in enumerate(samplers):
             sampler.stop()
 
-    print "Done"
+    print("Done")
 
 def startSamplers():
     global samplers

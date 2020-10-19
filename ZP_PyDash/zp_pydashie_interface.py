@@ -5,8 +5,7 @@ import pprint
 import json
 import os
 
-from urllib import quote
-
+import urllib.parse
 import zp_smartthings
 
 base_auth_url = "https://graph.api.smartthings.com/oauth/authorize?response_type=code&client_id="
@@ -59,7 +58,7 @@ def authInit(url,settingsFile="smartthings.json", filename="oauthin.json"):
 	with open(filename) as oauthfile:
 		oauthIn = json.load(oauthfile)
 
-	authURL = base_auth_url + oauthIn['client_id'] + base_auth_url2 + quote(url)	
+	authURL = base_auth_url + oauthIn['client_id'] + base_auth_url2 + urllib.parse.quote(url)	
 	return authURL
 
 
@@ -264,4 +263,5 @@ def updateTemp():
 	global smartThings
 
 	allDevices['temperature'] = smartThings.updateTemp()
+
 

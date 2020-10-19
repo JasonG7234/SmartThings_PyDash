@@ -1,7 +1,7 @@
 import os
 import logging
 import zp_st_pydash_app
-from urllib import quote, unquote
+from urllib.parse import quote, unquote
 from flask import Flask, render_template, Response, send_from_directory, request, current_app, redirect, jsonify, json
 import zp_pydashie_interface as zp_st
 
@@ -14,10 +14,10 @@ log = logging.getLogger(__name__)
 @app.route("/")
 def main():
     if(zp_st.getHostUrl() == None):
-        print "Trying to set Host URL"
+        print("Trying to set Host URL")
         zp_st.setHostUrl()
     if(zp_st.getHostUrl() == None):
-        print "Error setting Host URL"
+        print("Error setting Host URL")
         exit()
     if(zp_st.initd()):
         return render_template('main.html', title='ZP SmartThings PyDash')
@@ -26,30 +26,30 @@ def main():
 
 @app.route("/<path:path>/refresh/")
 def refresh(path):
-    print "Refreshing.."
+    print("Refreshing..")
     return redirect("/"+path)
 
 @app.route("/refresh/")
 def refreshed():
-    print "Refreshing.."
+    print("Refreshing..")
     return redirect("/")
 
 @app.route("/init/")
 def init():
-    print "Init.."
+    print("Init..")
     zp_st.init()
     return redirect("/")
 
 @app.route("/auth/")
 def auth():
-    print "auth.."
+    print("auth..")
     zp_st.initST()
     redirecturl = zp_st.authInit("http://"+ zp_st.getHostUrl() + "/callback")
     return redirect(redirecturl)
 
 @app.route("/reauth/")
 def reauth():
-    print "auth.."
+    print("auth..")
     redirecturl = zp_st.reauth("http://"+ zp_st.getHostUrl() + "/callback")
     return redirect(redirecturl)
 
@@ -419,7 +419,7 @@ def widget_html(widget_name):
         f.close()
         return contents
 
-import Queue
+import queue
 
 class Z:
     pass
@@ -472,9 +472,9 @@ def close_stream(*args, **kwargs):
 
 
 def run_zp_st_pydash_app():
-    import SocketServer
-    SocketServer.BaseServer.handle_error = close_stream
-    SocketServer.ThreadingTCPServer.allow_reuse_address = True
+    import socketserver
+    socketserver.BaseServer.handle_error = close_stream
+    socketserver.ThreadingTCPServer.allow_reuse_address = True
     zp_st_pydash_app.run(app, xyzzy)
 
 
